@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create an Accordion using Alpine JS</title>
+    <!-- Alpine JS CDN -->
+    <script
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      class="accordion-wrapper"
+      x-data='{
+
+        faqs:[
+            {
+                question : "What is a SAAS platform?",
+                answer : "SAAS platform is a cloud-based software service that allows users to access and use a variety of tools and functionality.",
+                isOpen : true,
+            },
+            {   
+                question : "How does billing work?",
+                answer : "We offers a variety of billing options, including monthly and annual subscription plans, as well as pay-as-you-go pricing for certain services. Payment is typically made through a credit card or other secure online payment method." ,
+                isOpen : true,
+            },
+            {   
+                question:"Can I get a refund for my subscription?",
+                answer:"We offers a 30-day money-back guarantee for most of its subscription plans. If you are not satisfied with your subscription within the first 30 days, you can request a full refund. Refunds for subscriptions that have been active for longer than 30 days may be considered on a case-by-case basis.",
+                isOpen : true,
+            },
+            {   
+                question:"How do I cancel my subscription?",
+                answer:"To cancel your We subscription, you can log in to your account and navigate to the subscription management page. From there, you should be able to cancel your subscription and stop future billing.",
+                isOpen : true,
+            },
+            {   
+                question:"Can I try this platform for free?",
+                answer:"We offers a free trial of its platform for a limited time. During the trial period, you will have access to a limited set of features and functionality, but you will not be charged. ",
+                isOpen : true,
+            },
+            {   
+                question:"Do you offer any discounts or promotions?",
+                answer:" We may offer discounts or promotions from time to time. To stay up-to-date on the latest deals and special offers, you can sign up for the company newsletter or follow it on social media",
+                isOpen : true,
+            },
+            
+            ]
+    }'
+    >
+      <header class="accordion-header">
+        <h2>FAQs</h2>
+        <p>Frequently asked questions</p>
+      </header>
+      <div class="accordion">
+        <template x-for="faq in faqs" :key="faq.question">
+          <div class="accordion-body">
+            <button class="accordion-button" @click="faq.isOpen=!faq.isOpen">
+              <div x-text="faq.question"></div>
+              <svg
+                viewBox="0 0 320 512"
+                width="10"
+                title="angle-up"
+                id="up-arrow"
+                x-show="!faq.isOpen"
+              >
+                >
+                <path
+                  d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"
+                />
+              </svg>
+              <svg
+                viewBox="0 0 320 512"
+                width="10"
+                title="angle-down"
+                id="down-arrow"
+                x-show="faq.isOpen"
+              >
+                <path
+                  d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"
+                />
+              </svg>
+            </button>
+            <div
+              class="accordion-content"
+              x-show="!faq.isOpen"
+              x-transition:enter-start="opacity-0 transition-500 transitionX-100"
+              x-transition:enter-end="opacity-100 transition-500 transitionX-0"
+            >
+              <p x-text="faq.answer"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </body>
+</html>
